@@ -2,15 +2,23 @@ const apiKey = "3af47d87556b4864bc8135852251304";
 const resultDiv = document.getElementById("result");
 const iconDiv = document.getElementById("weatherIcon");
 const recentDiv = document.getElementById("recentSearches");
+const themeToggle = document.getElementById("themeToggle");
+const unitToggle = document.getElementById("unitToggle");
 
-// Try to get user's location on load
-window.onload = function () {
+let isFahrenheit = localStorage.getItem("unit") === "F";
+let isLight = localStorage.getItem("theme") === "light";
+
+// Auto-detect location
+window.onload = () => {
+  if (isLight) toggleTheme(true);
+  if (isFahrenheit) toggleUnit(true);
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
       const coords = `${position.coords.latitude},${position.coords.longitude}`;
       getWeatherData(coords);
     });
   }
+  displayRecentSearches();
 };
 
 function getWeather() {
@@ -34,13 +42,14 @@ async function getWeatherData(location) {
       resultDiv.innerHTML = `<p>Error: ${data.error.message}</p>`;
     } else {
       const { name, country } = data.location;
-      const { temp_c, humidity, condition, air_quality } = data.current;
+      const { temp_c, temp_f, humidity, condition, air_quality } = data.current;
       const aqi = air_quality.pm2_5.toFixed(2);
       const iconUrl = "https:" + condition.icon;
 
+      const temperature = isFahrenheit ? `${temp_f}°F` : `${temp_c}°C`;
       resultDiv.innerHTML = `
         <p><span class="highlight">${name}, ${country}</span></p>
-        <p>🌡️ Temperature: <span class="highlight">${temp_c}°C</span></p>
+        <p>🌡️ Temperature: <span class="highlight">${temperature}</span></p>
         <p>💧 Humidity: <span class="highlight">${humidity}%</span></p>
         <p>🌫️ AQI (PM2.5): <span class="highlight">${aqi}</span></p>
         <p>${condition.text}</p>
@@ -70,5 +79,26 @@ function displayRecentSearches() {
   }
 }
 
-// Initial display of recent searches
-displayRecentSearches();
+themeToggle.addEventListener("click", () => {
+  isLight = !isLight;
+  toggleTheme(isLight);
+});
+
+function toggleTheme(light) {
+  document.body.classList.toggle("light-mode", light);
+  themeToggle.textContent = light ? "🌞 Light Mode" : "🌙 Dark Mode";
+  localStorage.setItem("theme", light ? "light" : "dark");
+}
+
+unitToggle.addEventListener("click", () => {
+  isFahrenheit = !isFahrenheit;
+  unitToggle.textContent = isFahrenheit ? "Switch to °C" : "Switch to °F";
+  localStorage.setItem("unit", isFahrenheit ? "F" : "C");
+  const lastLocation = JSON.parse(localStorage.getItem("recentSearches"))?.[0];
+  if (lastLocation) getWeatherData(lastLocation);
+});
+
+function toggleUnit(fahrenheit) {
+  isFahrenheit = fahrenheit;
+  unitToggle.textContent = fahrenheit ? "Switch to °C" : "Switch to °F";
+}
