@@ -1,105 +1,160 @@
 * {
-    box-sizing: border-box;
-  }
-  
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 20px;
-  }
-  
-  .weather-container {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 30px;
-    border-radius: 20px;
-    max-width: 420px;
-    width: 100%;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
-    text-align: center;
-  }
-  
-  .weather-container h1 {
-    margin-bottom: 20px;
-  }
-  
-  .input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  input[type="text"] {
-    padding: 12px 16px;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    backdrop-filter: blur(4px);
-    outline: none;
-    transition: 0.3s;
-  }
-  
-  input[type="text"]::placeholder {
-    color: #ddd;
-  }
-  
-  input[type="text"]:focus {
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
-    background: rgba(255, 255, 255, 0.25);
-  }
-  
-  button {
-    padding: 12px;
-    border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #f1c40f, #f39c12);
-    color: #000;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s ease, background 0.3s ease;
-  }
-  
-  button:hover {
-    background: linear-gradient(135deg, #ffe56c, #ffb400);
-    transform: scale(1.03);
-  }
-  
-  .result {
-    margin-top: 20px;
-    background-color: rgba(255,255,255,0.1);
-    padding: 20px;
-    border-radius: 12px;
-  }
-  
-  .result p {
-    margin: 10px 0;
-    font-size: 18px;
-  }
-  
-  .highlight {
-    color: #f1c40f;
-    font-weight: bold;
-  }
-  
-  #weatherIcon img {
-    margin-top: 10px;
-    height: 64px;
-  }
-  
-  .recent-searches {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #ccc;
-  }
-  
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.weather-container {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+.weather-container h1 {
+  margin-bottom: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  backdrop-filter: blur(4px);
+  outline: none;
+  transition: 0.3s;
+}
+
+input[type="text"]::placeholder {
+  color: #ddd;
+}
+
+input[type="text"]:focus {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+button {
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f1c40f, #f39c12);
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #ffe56c, #ffb400);
+  transform: scale(1.03);
+}
+
+.result {
+  margin-top: 20px;
+  background-color: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.result p {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.highlight {
+  color: #f1c40f;
+  font-weight: bold;
+}
+
+#weatherIcon img {
+  margin-top: 10px;
+  height: 64px;
+}
+
+.recent-searches {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.toggle-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.toggle-controls button {
+  flex: 1;
+  margin: 0 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #444;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.toggle-controls button:hover {
+  background-color: #666;
+}
+
+/* Light mode */
+body.light-mode {
+  background: linear-gradient(135deg, #fefcea, #f1da36);
+  color: #333;
+}
+
+body.light-mode .weather-container {
+  background: rgba(255, 255, 255, 0.9);
+  color: #000;
+}
+
+body.light-mode input,
+body.light-mode .result {
+  background: rgba(0, 0, 0, 0.05);
+  color: #000;
+}
+
+body.light-mode input::placeholder {
+  color: #555;
+}
+
+body.light-mode .highlight {
+  color: #e67e22;
+}
+
+body.light-mode .toggle-controls button {
+  background-color: #eee;
+  color: #333;
+}
+
+body.light-mode .toggle-controls button:hover {
+  background-color: #ddd;
+}
