@@ -4,8 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Weather App</title>
-
-
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -15,46 +14,11 @@
       <input type="text" id="locationInput" placeholder="Enter location..." />
       <button onclick="getWeather()">Check</button>
     </div>
-    <div class="result" id="result">
-      <!-- Weather info appears here -->
-    </div>
+    <div id="weatherIcon"></div>
+    <div class="result" id="result"></div>
+    <div class="recent-searches" id="recentSearches"></div>
   </div>
 
-  <script>
-    async function getWeather() {
-      const location = document.getElementById("locationInput").value.trim();
-      const resultDiv = document.getElementById("result");
-
-      if (!location) {
-        resultDiv.innerHTML = "<p>Please enter a location! 🙏</p>";
-        return;
-      }
-
-      resultDiv.innerHTML = "<p>Loading weather data...</p>";
-
-      try {
-        const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=3af47d87556b4864bc8135852251304&q=${encodeURIComponent(location)}&aqi=yes`);
-        const data = await response.json();
-
-        if (data.error) {
-          resultDiv.innerHTML = `<p>Error: ${data.error.message}</p>`;
-        } else {
-          const { name, country } = data.location;
-          const { temp_c, humidity } = data.current;
-          const aqi = data.current.air_quality.pm2_5.toFixed(2); // PM2.5 value
-          resultDiv.innerHTML = `
-            <p><span class="highlight">${name}, ${country}</span></p>
-            <p>🌡️ Temperature: <span class="highlight">${temp_c}°C</span></p>
-            <p>💧 Humidity: <span class="highlight">${humidity}%</span></p>
-            <p>🌫️ AQI (PM2.5): <span class="highlight">${aqi}</span></p>
-          `;
-        }
-      } catch (error) {
-        resultDiv.innerHTML = "<p>Failed to fetch weather. Try again later. 😞</p>";
-        console.error(error);
-      }
-    }
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
