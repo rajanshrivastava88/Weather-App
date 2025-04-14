@@ -1,3 +1,4 @@
+
 const apiKey = "3af47d87556b4864bc8135852251304";
 const resultDiv = document.getElementById("result");
 const iconDiv = document.getElementById("weatherIcon");
